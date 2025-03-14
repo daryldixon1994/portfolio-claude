@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexia Toulmet | Développeuse et formatrice IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables et reset */
+        :root {
+            --primary-color: #2D3E50;
+            --secondary-color: #3D9DE0;
+            --accent-color: #FF5A5F;
+            --light-color: #F8F9FA;
+            --dark-color: #212529;
+            --text-color: #333;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --border-radius: 8px;
+            --container-width: 1200px;
+            --font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Typographie */
+        h1, h2, h3, h4 {
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-top: var(--spacing-md);
+            color: var(--dark-color);
+        }
+
+        p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header */
+        .header {
+            padding: var(--spacing-sm) 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            color: var(--dark-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo a {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: var(--spacing-md);
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--light-color);
+            color: var(--accent-color);
+        }
+
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding-top: var(--spacing-lg);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 4px 10px rgba(255, 90, 95, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #ff4146;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 90, 95, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--spacing-lg) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* About section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        /* Projects section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: var(--spacing-md);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+        }
+
+        /* Featured project */
+        .featured-project {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid #eee;
+        }
+
+        .featured-project-content {
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-lg);
+        }
+
+        .featured-project h3 {
+            font-size: 2rem;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .featured-project-image {
+            background-color: var(--accent-color);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        /* Experience section */
+        .experience-item {
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            border: 1px solid #eee;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .experience-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark-color);
+        }
+
+        .experience-company {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .experience-date {
+            color: #666;
+        }
+
+        /* Skills section */
+        .skills {
+            background-color: var(--light-color);
+        }
+        
+        .skill-category {
+            background-color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .skill-category {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .skill-category h3 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-sm);
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: "•";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Contact section */
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-md);
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact-method span {
+            min-width: 100px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: var(--spacing-md) 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .social-links li {
+            margin: 0 var(--spacing-xs);
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Media queries for responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-project-content {
+                flex-direction: column;
+            }
+
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .experience-date {
+                margin-top: var(--spacing-xs);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#">Alexia Toulmet</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#experiences">Expériences</a></li>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="container hero-content">
+            <h1>Alexia Toulmet</h1>
+            <p>Je forme les femmes à l'IA avec Meimei / Enseignante à SciencesPo et sur OpenClassrooms</p>
+            <a href="#projets" class="btn">Découvrir Meimei</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <h2 class="section-title">À propos</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Après 7 ans en développement web, 6 cours créés pour OpenClassrooms, 6 semestres à enseigner mon cours de développement à Sciences Po, j'ai décidé de prendre le virage IA.</p>
+                    <p>J'ai créé Meimei, la première formation courte en IA dédiée aux femmes qui ne sont pas tech. 3 semaines pour créer, gagner en productivité, et profiter de la révolution en cours.</p>
+                    <p>À côté de Meimei, je développe toujours en freelance, je code des produits IA, et j'accompagne les entreprises qui mettent en place une stratégie IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projets">
+        <div class="container">
+            <h2 class="section-title">Projets</h2>
+            
+            <!-- Featured Project (Meimei) -->
+            <div class="featured-project">
+                <div class="featured-project-image">Meimei</div>
+                <div class="featured-project-content">
+                    <h3>Meimei - Formation IA pour les femmes</h3>
+                    <p>Meimei est la première formation à l'IA pour les femmes qui n'ont pas un profil technique. En 3 semaines, en format cours du soir, elles apprennent comment intégrer l'IA dans leur quotidien pour gagner en créativité et en productivité.</p>
+                    <p>Même si tu n'as pas un profil technique, tu peux totalement monter en compétence sur l'IA pour créer, gagner en efficacité et comprendre la révolution en cours.</p>
+                    <a href="https://www.joinmeimei.com" class="btn" target="_blank">Découvrir Meimei</a>
+                </div>
+            </div>
+            
+            <!-- Other Projects -->
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">OpenClassrooms</div>
+                    <div class="project-content">
+                        <h3>Cours OpenClassrooms</h3>
+                        <p>Création de cours populaires comme "Créez votre site web avec HTML5 et CSS3", "Débutez avec React", et "Créez une maquette web avec Figma".</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">Sciences Po</div>
+                    <div class="project-content">
+                        <h3>Enseignement à Sciences Po</h3>
+                        <p>Formation des étudiant·es en Master à Sciences Po aux bases du développement web au sein du Centre pour l'entrepreneuriat.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">IA Développement</div>
+                    <div class="project-content">
+                        <h3>Développement de produits IA</h3>
+                        <p>Conception et développement de solutions basées sur l'intelligence artificielle pour diverses entreprises.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experiences">
+        <div class="container">
+            <h2 class="section-title">Expériences</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Founder</div>
+                        <div class="experience-company">Meimei</div>
+                    </div>
+                    <div class="experience-date">avril 2024 - Présent</div>
+                </div>
+                <p>Création et développement de Meimei, la première formation à l'IA pour les femmes qui ne sont pas tech.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Lecturer</div>
+                        <div class="experience-company">Sciences Po</div>
+                    </div>
+                    <div class="experience-date">septembre 2021 - Présent</div>
+                </div>
+                <p>Formation des étudiant·es en Master à Sciences Po aux bases du développement web au sein du Centre pour l'entrepreneuriat.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Teacher</div>
+                        <div class="experience-company">OpenClassrooms</div>
+                    </div>
+                    <div class="experience-date">juin 2019 - Présent</div>
+                </div>
+                <p>Création de cours et projets pour OpenClassrooms, dont plusieurs cours très populaires sur le développement web et le design.</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Software Engineer</div>
+                        <div class="experience-company">Meilisearch</div>
+                    </div>
+                    <div class="experience-date">septembre 2022 - juin 2024</div>
+                </div>
+                <p>Développement de l'application web permettant d'héberger son propre moteur de recherche en quelques clics au sein de l'équipe Cloud.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="competences" class="skills">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Développement Web</h3>
+                    <ul class="skill-list">
+                        <li>HTML5/CSS3</li>
+                        <li>JavaScript</li>
+                        <li>React.js</li>
+                        <li>Node.js</li>
+                        <li>TypeScript</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Intelligence Artificielle</h3>
+                    <ul class="skill-list">
+                        <li>IA Générative</li>
+                        <li>Prompt Engineering</li>
+                        <li>Stratégie IA</li>
+                        <li>Formation IA</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Gestion de Projet</h3>
+                    <ul class="skill-list">
+                        <li>Project Management</li>
+                        <li>Entrepreneuriat</li>
+                        <li>Formation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Langues</h3>
+                    <ul class="skill-list">
+                        <li>Français (Natif)</li>
+                        <li>Anglais (Professionnel)</li>
+                        <li>Espagnol (Notions)</li>
+                        <li>Chinois (Notions)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <div class="contact-method">
+                    <span>Email:</span>
+                    <a href="mailto:alexiatoulmet@gmail.com">alexiatoulmet@gmail.com</a>
+                </div>
+                <div class="contact-method">
+                    <span>LinkedIn:</span>
+                    <a href="https://www.linkedin.com/in/alexia-toulmet" target="_blank">linkedin.com/in/alexia-toulmet</a>
+                </div>
+                <div class="contact-method">
+                    <span>YouTube:</span>
+                    <a href="https://www.youtube.com/channel/UCnZUTC448cA6oWLZgNn0PXw" target="_blank">Chaîne YouTube</a>
+                </div>
+                <div class="contact-method">
+                    <span>Site Web:</span>
+                    <a href="https://www.joinmeimei.com" target="_blank">www.joinmeimei.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Alexia Toulmet. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>
